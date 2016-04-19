@@ -1,5 +1,4 @@
 
-
 interface JokeScope extends ng.IScope {
 	jokes: IChuckJoke[];
 	isNerdy: boolean;
@@ -7,13 +6,12 @@ interface JokeScope extends ng.IScope {
 }
 
 class JokeController {
-	static $inject = ['$scope', 'storageService', 'downloadService', 'recommendService'];
+	static $inject = ['$scope', 'storageService', 'downloadService'];
 
 	constructor(
 		private $scope: JokeScope,
 		private storageService: StorageService,
-		private downloadService: DownloadService,
-		private recommendService: RecommendService
+		private downloadService: DownloadService
 	) {
 		console.log('MainController created');
 		$scope.jokes = [];
@@ -24,30 +22,21 @@ class JokeController {
 	}
 
 	getAJoke() {
-		this.downloadService.downloadJoke()
-		.then((joke) => this.storageService.add(joke))
-		.then(() => this.refresh());
+		// Start doenload then add to service then refresh
 	}
 
 	recommendJoke(joke: IChuckJoke) {
-		this.recommendService.sendMsg({
-			name: 'bela',
-			id: joke.id,
-			joke: joke.joke,
-		});
+		// TODO
+		console.log('it\'s good for you');
 	}
 
 	clearAll() {
-		this.storageService.clear()
-		.then(() => this.refresh());
+		// TODO: Clear all then refresh
 	}
 
 	refresh() {
-		this.storageService.getAll()
-		.then(jokes => this.$scope.jokes = jokes)
-		.catch(err => {
-			console.warn(err);
-			this.$scope.err = (err.target && err.target.error) || JSON.stringify(err);
-		});
+		// TODO: getAll
+		// then put them to $scope
+		// Then catch errors
 	}
 }

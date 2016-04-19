@@ -1,6 +1,4 @@
 interface IMainScope extends ng.IScope {
-	storageInit: boolean;
-	err: string;
 }
 
 class MainController {
@@ -9,8 +7,6 @@ class MainController {
 		private $scope: IMainScope,
 		private storageService: StorageService
 	) {
-		$scope.storageInit = false;
-		$scope.err = '';
 		storageService.initialize();
 	}
 }
