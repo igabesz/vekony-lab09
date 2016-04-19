@@ -22,7 +22,12 @@ class JokeController {
 	}
 
 	getAJoke() {
-		// Start doenload then add to service then refresh
+        this.downloadService.downloadJoke()
+        .then(joke => {
+            console.log('Got joke');
+            return this.storageService.add(joke);
+        })
+        .then(() => this.refresh());
 	}
 
 	recommendJoke(joke: IChuckJoke) {
@@ -36,7 +41,10 @@ class JokeController {
 
 	refresh() {
 		// TODO: getAll
+        this.storageService.getAll()
 		// then put them to $scope
+        .then(jokes => this.$scope.jokes = jokes)
 		// Then catch errors
+        .catch(err => this.$scope.err = err);
 	}
 }
