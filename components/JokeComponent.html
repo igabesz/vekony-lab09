@@ -1,0 +1,25 @@
+<h2>List of jokes</h2>
+
+<p>
+	<button class="btn btn-success" ng-click="$ctrl.getAJoke()"><i class="fa fa-plus"></i> Add</button>
+	<button class="btn btn-danger" ng-click="$ctrl.clearAll()"><i class="fa fa-minus-circle"></i> Clear all</button>
+	<label class="text-danger">
+		{{err}}&nbsp;
+		<a ng-show="err" ng-click="err = ''"><i class="fa fa-close"></i></a>
+	</label>
+</p>
+
+<table class="table table-striped">
+	<tr>
+		<th>ID</th>
+		<th>Joke</th>
+		<th>Flags</th>
+		<th>Rec.</th>
+	</tr>
+	<tr ng-repeat="joke in jokes">
+		<td>{{joke.id}}</td>
+		<td>{{joke.joke}}</td>
+		<td><label class="label label-info" ng-show="joke.isNerdy">Nerdy</label></td>
+		<td><button class="btn btn-success" ng-click="$ctrl.recommendJoke(joke)"><i class="fa fa-star"></i></button></td>
+	</tr>
+</table>

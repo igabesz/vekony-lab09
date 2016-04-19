@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+  <title>Chuck app</title>
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <!-- For ComponentRouter -->
+  <base href="/">
+
+  <!-- Loading JS -->
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="node_modules/angular/angular.min.js"></script>
+  <script src="node_modules/@angular/router/angular1/angular_1_router.js"></script>
+  <script src="components/MainController.js"></script>
+  <script src="components/NavController.js"></script>
+  <script src="components/WelcomeController.js"></script>
+  <script src="components/JokeController.js"></script>
+  <script src="components/RecommendController.js"></script>
+  <script src="services/StorageService.js"></script>
+  <script src="services/DownloadService.js"></script>
+  <script src="services/RecommendService.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body ng-app="app">
+  <nav-component></nav-component>
+  <h1>Chuck sees you</h1>
+  <!-- <div class="row"> -->
+    <main-component class="col-md-9"></main-component>
+    <recommend-component class="col-md-3"></recommend-component>
+  <!-- </div> -->
+</body>

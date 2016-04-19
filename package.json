@@ -1,0 +1,20 @@
+{
+  "name": "vekonykliens-lab-09",
+  "version": "1.0.0",
+  "description": "Vékonykliens labor 09",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gábor IMRE <imre.gabesz@aut.bme.hu>",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/router": "^0.2.0",
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "font-awesome": "^4.6.1",
+    "jquery": "^2.2.3",
+    "lodash": "^4.11.1",
+	"socket.io": "^1.4.5"
+  }
+}

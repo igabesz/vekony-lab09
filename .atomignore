@@ -1,0 +1,3 @@
+# Use with the atom-ignore plugin
+*.js.map
+*.js
