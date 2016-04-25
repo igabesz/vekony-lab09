@@ -4,8 +4,7 @@ let appModule = angular.module('app', ['ngComponentRouter'])
 // Registering services
 appModule
 .service('downloadService', DownloadService)
-.service('storageService', StorageService)
-.service('recommendService', RecommendService);
+.service('storageService', StorageService);
 
 // Directives
 appModule
@@ -40,10 +39,6 @@ appModule
 .component('jokeComponent', {
 	templateUrl: 'components/JokeComponent.html',
 	controller: JokeController,
-})
-.component('recommendComponent', {
-	templateUrl: 'components/RecommendComponent.html',
-	controller: RecommendController,
 })
 .component('chuckComponent', {
 	templateUrl: 'components/ChuckComponent.html',

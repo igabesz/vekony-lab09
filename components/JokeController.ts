@@ -7,13 +7,12 @@ interface JokeScope extends ng.IScope {
 }
 
 class JokeController {
-	static $inject = ['$scope', 'storageService', 'downloadService', 'recommendService'];
+	static $inject = ['$scope', 'storageService', 'downloadService'];
 
 	constructor(
 		private $scope: JokeScope,
 		private storageService: StorageService,
-		private downloadService: DownloadService,
-		private recommendService: RecommendService
+		private downloadService: DownloadService
 	) {
 		console.log('MainController created');
 		$scope.jokes = [];
@@ -30,11 +29,6 @@ class JokeController {
 	}
 
 	recommendJoke(joke: IChuckJoke) {
-		this.recommendService.sendMsg({
-			name: 'bela',
-			id: joke.id,
-			joke: joke.joke,
-		});
 	}
 
 	clearAll() {
