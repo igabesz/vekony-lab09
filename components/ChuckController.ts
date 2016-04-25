@@ -14,9 +14,9 @@ interface IChuckScope extends ng.IScope {
 
 // This directive notifies the controller about a file upload
 function ChuckFileBindDirective(): ng.IDirective {
-	return (scope: IChuckScope, elm, attrs) => {
+	return (scope: IChuckScope, elm: ng.IAugmentedJQuery, attrs) => {
 		let type: 'background' | 'foreground' = attrs.chuckType;
-		elm.bind('change', (event) => {
+		elm.bind('change', (event: any) => {
 			// No files
 			if (!event.target.files || !event.target.files.length) return;
 			// Getting into the sight of Angular
