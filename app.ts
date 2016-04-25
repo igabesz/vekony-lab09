@@ -7,6 +7,12 @@ appModule
 .service('storageService', StorageService)
 .service('recommendService', RecommendService);
 
+// Directives
+appModule
+.directive('chuckFileBind', ChuckFileBindDirective)
+.directive('chuckCanvas', ChuckCanvasDirective)
+.directive('chuckDrop', ChuckDropDirective);
+
 // Registering components
 appModule
 .component('mainComponent', <any>{
@@ -15,6 +21,7 @@ appModule
 	$routeConfig: [
 		{path: '/welcome', name: 'Welcome', component: 'welcomeComponent', useAsDefault: true},
 		{path: '/jokes', name: 'Jokes', component: 'jokeComponent'},
+		{path: '/chuck', name: 'Chuck', component: 'chuckComponent'},
 	],
 })
 .component('navComponent', {
@@ -37,4 +44,8 @@ appModule
 .component('recommendComponent', {
 	templateUrl: 'components/RecommendComponent.html',
 	controller: RecommendController,
+})
+.component('chuckComponent', {
+	templateUrl: 'components/ChuckComponent.html',
+	controller: ChuckController,
 });
