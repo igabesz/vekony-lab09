@@ -6,7 +6,7 @@
     "sourceMap": true
   },
   "exclude": [
-    "mode_modules",
+    "node_modules",
     "typings/main.d.ts",
 	"typings/main",
 	"server"
