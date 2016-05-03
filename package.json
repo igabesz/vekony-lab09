@@ -15,5 +15,13 @@
     "font-awesome": "^4.6.1",
     "jquery": "^2.2.3",
     "lodash": "^4.11.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^2.0.0-alpha",
+    "gulp-typescript": "^2.13.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-watch": "^4.3.5"
   }
 }
