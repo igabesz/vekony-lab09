@@ -5,41 +5,17 @@
 .main-chuck-canvas {
 	border: 1px solid black;
 }
-.chuck-drop {
-	border: 2px dashed #bbb;
-	color: #888;
-	font-size: larger;
-	margin: 5px;
-	padding: 20px;
-}
 </style>
 
 <h2>Chuck generator</h2>
 <!-- Inputs for selecting files -->
-<input id="chuck-bg-select" type="file" accept="image/*" style="display:none;" chuck-file-bind chuck-type="background"/>
-<input id="chuck-front-select" type="file" accept="image/*" style="display:none;" chuck-file-bind chuck-type="foreground"/>
-
-<!-- Control buttons -->
-<div class="row">
-	<div class="col-md-4">
-		<button class="btn btn-primary" onclick="$('#chuck-bg-select').click()">Select background</button>
-		<img class="chuck-thumb" ng-src="{{backgroundSrc}}" />
-		<div class="chuck-drop" chuck-drop chuck-type="background">
-			<i class="fa fa-plus"></i> Drop here
-		</div>
-	</div>
-	<div class="col-md-4">
-		<button class="btn btn-primary" onclick="$('#chuck-front-select').click()">Select foreground</button>
-		<img class="chuck-thumb" ng-src="{{foregroundSrc}}" />
-		<div class="chuck-drop" chuck-drop chuck-type="foreground">
-			<i class="fa fa-plus"></i> Drop here
-		</div>
-	</div>
-</div>
+<input id="chuck-bg-select" type="file" accept="image/*" chuck-file-bind chuck-type="background"/>
+<input id="chuck-front-select" type="file" accept="image/*" chuck-file-bind chuck-type="foreground"/>
 
 <!-- Control buttons -->
 <button class="btn btn-success" ng-click="$ctrl.draw()">Draw</button>
-<button class="btn btn-info" ng-click="$ctrl.saveImage()">Save</button>
+Save here:<br>
+<img style="width: 128px; height: 96px" ng-src="{{downloadHref}}">
 
 <!-- Foreground properties -->
 <h3>Foreground props</h3>

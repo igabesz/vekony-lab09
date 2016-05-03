@@ -9,8 +9,7 @@ appModule
 // Directives
 appModule
 .directive('chuckFileBind', ChuckFileBindDirective)
-.directive('chuckCanvas', ChuckCanvasDirective)
-.directive('chuckDrop', ChuckDropDirective);
+.directive('chuckCanvas', ChuckCanvasDirective);
 
 // Registering components
 appModule
