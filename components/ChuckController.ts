@@ -117,7 +117,7 @@ class ChuckController {
 	saveImage() {
 		// Create a link
 		let anchor: HTMLAnchorElement = document.createElement('a');
-		anchor.download = 'chuck.png';
+		(<any>anchor).download = 'chuck.png';
 		anchor.href = this.canvas.toDataURL('image/png');
 		// Then manually click it
 		anchor.click();
