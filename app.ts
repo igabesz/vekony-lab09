@@ -4,7 +4,8 @@ let appModule = angular.module('app', ['ngComponentRouter'])
 // Registering services
 appModule
 .service('downloadService', DownloadService)
-.service('storageService', StorageService);
+.service('storageService', StorageService)
+.service('recommendService', RecommendService);
 
 // Directives
 appModule
@@ -43,4 +44,8 @@ appModule
 .component('chuckComponent', {
 	templateUrl: 'components/ChuckComponent.html',
 	controller: ChuckController,
+})
+.component('recommendComponent', {
+	templateUrl: 'components/recommendComponent.html',
+	controller: RecommendController,
 });
