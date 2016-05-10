@@ -24,6 +24,8 @@ let config = {
 class GameLogic {
 	private renderer: PIXI.CanvasRenderer;
 	private stage: PIXI.Container;
+	private player: PIXI.Sprite & {vx?: number};
+	private time = 0;
 
 	initialize(canvas: HTMLCanvasElement) {
 		this.renderer = new PIXI.CanvasRenderer(800, 600, {view: canvas});
@@ -36,11 +38,38 @@ class GameLogic {
 		// Background
 		this.stage = new PIXI.Container();
 		this.stage.addChild(new PIXI.Sprite(resources[config.map.sprite].texture));
+		// Player
+		this.player = new PIXI.Sprite(resources[config.player.sprite].texture);
+		this.player.anchor = new PIXI.Point(0.5, 0.5);
+		this.player.position.set(400, 550);
+		this.player.width = 96;
+		this.player.height = 96;
+		this.stage.addChild(this.player);
+		this.player.vx = 0;
+		// Other setup
+		this.setupKeyboardListeners();
 		// draw
 		requestAnimationFrame((time: number) => this.draw(time));
 	}
 
+	private setupKeyboardListeners() {
+		let left = keyboard(37);
+		let up = keyboard(38);
+		let right = keyboard(39);
+		let down = keyboard(40);
+		let space = keyboard(32);
+		left.press = () => this.player.vx = -config.player.vx;
+		left.release = () => (this.player.vx < 0) && (this.player.vx = 0);
+		right.press = () => this.player.vx = config.player.vx;
+		right.release = () => (this.player.vx > 0) && (this.player.vx = 0);
+	}
+
 	private draw(time: number) {
+		let dt = time - this.time;
+		this.time = time;
+		let spd = dt / config.dt;
+		// Moving player
+		this.player.x += this.player.vx * spd;
 		// Drawing
 		this.renderer.render(this.stage);
 		requestAnimationFrame((time2) => this.draw(time2));
