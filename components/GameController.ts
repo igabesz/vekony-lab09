@@ -25,6 +25,7 @@ class GameLogic {
 	private renderer: PIXI.CanvasRenderer;
 	private stage: PIXI.Container;
 	private player: PIXI.Sprite & {vx?: number};
+	private bullets: (PIXI.Sprite & {vy?: number})[] = [];
 	private time = 0;
 
 	initialize(canvas: HTMLCanvasElement) {
@@ -62,6 +63,21 @@ class GameLogic {
 		left.release = () => (this.player.vx < 0) && (this.player.vx = 0);
 		right.press = () => this.player.vx = config.player.vx;
 		right.release = () => (this.player.vx > 0) && (this.player.vx = 0);
+		space.press = () => this.fire();
+	}
+
+	private fire() {
+		let bullet = new PIXI.Sprite(PIXI.loader.resources[config.bullet.sprite].texture);
+		bullet.anchor.set(0.5, 0.5);
+		bullet.position.set(this.player.x, this.player.y - 20);
+		(<any>bullet).vy = config.bullet.vy;
+		this.bullets.push(bullet);
+		this.stage.addChild(bullet);
+	}
+	private removeBullet(b: PIXI.Sprite) {
+		b.destroy();
+		this.stage.removeChild(b);
+		_.remove(this.bullets, b);
 	}
 
 	private draw(time: number) {
@@ -70,6 +86,12 @@ class GameLogic {
 		let spd = dt / config.dt;
 		// Moving player
 		this.player.x += this.player.vx * spd;
+		// Moving bullets
+		let bullets = _.clone(this.bullets);
+		for (let b of bullets) {
+			b.y += b.vy * spd;
+			if (b.y < -40) this.removeBullet(b);
+		}
 		// Drawing
 		this.renderer.render(this.stage);
 		requestAnimationFrame((time2) => this.draw(time2));
