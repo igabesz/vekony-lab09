@@ -82,7 +82,7 @@ class GameLogic {
 	}
 
 	private createEnemy() {
-	let enemy = new PIXI.Sprite(PIXI.loader.resources[config.enemy.sprite].texture);
+		let enemy = new PIXI.Sprite(PIXI.loader.resources[config.enemy.sprite].texture);
 		enemy.anchor.set(0.5, 0.5);
 		enemy.position.set(_.random(config.map.x - 40) + 20, -20);
 		enemy.width = config.enemy.width;
@@ -104,6 +104,8 @@ class GameLogic {
 		let spd = dt / config.dt;
 		// Moving player
 		this.player.x += this.player.vx * spd;
+		if (this.player.x < 0) this.player.x = 0;
+		if (this.player.x > config.map.x) this.player.x = config.map.x;
 		// Moving bullets
 		let bullets = _.clone(this.bullets);
 		for (let b of bullets) {
