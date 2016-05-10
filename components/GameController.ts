@@ -117,7 +117,15 @@ class GameLogic {
 		let enemies = _.clone(this.enemies);
 		for (let e of enemies) {
 			e.y += e.vy * spd;
-			if (e.y > config.map.y + 20) this.removeEnemy(e);
+			if (e.y > config.map.y + 20) { this.removeEnemy(e); continue; }
+			bullets = _.clone(this.bullets);
+			for (let b of bullets) {
+				if (hitCenterRect(e, b, 0.8)) {
+					this.removeEnemy(e);
+					this.removeBullet(b);
+					break;
+				}
+			}
 		}
 		// Drawing
 		this.renderer.render(this.stage);
