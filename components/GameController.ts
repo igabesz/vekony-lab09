@@ -22,10 +22,29 @@ let config = {
 };
 
 class GameLogic {
+	private renderer: PIXI.CanvasRenderer;
+	private stage: PIXI.Container;
 
 	initialize(canvas: HTMLCanvasElement) {
+		this.renderer = new PIXI.CanvasRenderer(800, 600, {view: canvas});
+		let images = [config.map.sprite, config.player.sprite, config.enemy.sprite, config.bullet.sprite];
+		PIXI.loader.add(images).load(() => this.loaded());
 	}
 
+	private loaded() {
+		let resources = PIXI.loader.resources;
+		// Background
+		this.stage = new PIXI.Container();
+		this.stage.addChild(new PIXI.Sprite(resources[config.map.sprite].texture));
+		// draw
+		requestAnimationFrame((time: number) => this.draw(time));
+	}
+
+	private draw(time: number) {
+		// Drawing
+		this.renderer.render(this.stage);
+		requestAnimationFrame((time2) => this.draw(time2));
+	}
 }
 
 
