@@ -22,6 +22,7 @@ appModule
 		{path: '/welcome', name: 'Welcome', component: 'welcomeComponent', useAsDefault: true},
 		{path: '/jokes', name: 'Jokes', component: 'jokeComponent'},
 		{path: '/chuck', name: 'Chuck', component: 'chuckComponent'},
+		{path: '/game', name: 'Game', component: 'gameComponent'},
 	],
 })
 .component('navComponent', {
@@ -48,4 +49,10 @@ appModule
 .component('recommendComponent', {
 	templateUrl: 'components/recommendComponent.html',
 	controller: RecommendController,
+})
+.component('gameComponent', {
+	template: `
+<h2>Game</h2>
+<canvas id="chuck-game-canvas" width="800" height="600"></canvas>`,
+	controller: GameController,
 });

@@ -19,11 +19,11 @@ class RecommendService {
 		private $http: ng.IHttpService,
 		private $timeout: ng.ITimeoutService
 	) {
-		this.socket = io(RecommendService.URL);
-		this.socket.on('recommend', (msg: IRecommendMessage) => $timeout(() => {
-			for (let handler of this.onMessageHandlers)
-				handler(msg);
-		}));
+		// this.socket = io(RecommendService.URL);
+		// this.socket.on('recommend', (msg: IRecommendMessage) => $timeout(() => {
+		// 	for (let handler of this.onMessageHandlers)
+		// 		handler(msg);
+		// }));
 	}
 
 	register(msgHandler: (msg: IRecommendMessage) => any) {
