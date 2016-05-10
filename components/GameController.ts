@@ -26,6 +26,7 @@ class GameLogic {
 	private stage: PIXI.Container;
 	private player: PIXI.Sprite & {vx?: number};
 	private bullets: (PIXI.Sprite & {vy?: number})[] = [];
+	private enemies: (PIXI.Sprite & {vy?: number})[] = [];
 	private time = 0;
 
 	initialize(canvas: HTMLCanvasElement) {
@@ -80,6 +81,23 @@ class GameLogic {
 		_.remove(this.bullets, b);
 	}
 
+	private createEnemy() {
+	let enemy = new PIXI.Sprite(PIXI.loader.resources[config.enemy.sprite].texture);
+		enemy.anchor.set(0.5, 0.5);
+		enemy.position.set(_.random(config.map.x - 40) + 20, -20);
+		enemy.width = config.enemy.width;
+		enemy.height = config.enemy.height;
+		(<any>enemy).vy = config.enemy.vy;
+		this.enemies.push(enemy);
+		this.stage.addChild(enemy);
+	}
+
+	private removeEnemy(e: PIXI.Sprite) {
+		e.destroy();
+		this.stage.removeChild(e);
+		_.remove(this.enemies, e);
+	}
+
 	private draw(time: number) {
 		let dt = time - this.time;
 		this.time = time;
@@ -91,6 +109,15 @@ class GameLogic {
 		for (let b of bullets) {
 			b.y += b.vy * spd;
 			if (b.y < -40) this.removeBullet(b);
+		}
+		// Creating enemy
+		let isCreated = _.random(1, true) < config.enemy.create * spd;
+		isCreated && this.createEnemy();
+		// Moving enemy
+		let enemies = _.clone(this.enemies);
+		for (let e of enemies) {
+			e.y += e.vy * spd;
+			if (e.y > config.map.y + 20) this.removeEnemy(e);
 		}
 		// Drawing
 		this.renderer.render(this.stage);
