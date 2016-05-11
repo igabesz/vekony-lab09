@@ -64,9 +64,9 @@ class StorageService {
 	private getObjectStore(mode = 'readonly') {
 		if (!this.db) throw new Error('StorageService is not initialized!');
 		// Create a transaction and return SUBJECTS_TABLE
-        return this.db
-            .transaction(StorageService.SUBJECTS, mode)
-            .objectStore(StorageService.SUBJECTS);
+		return this.db
+			.transaction(StorageService.SUBJECTS, mode)
+			.objectStore(StorageService.SUBJECTS);
 	}
 
 	clear() {
@@ -79,37 +79,37 @@ class StorageService {
 	add(subject: IChuckJoke) {
 		console.log('StorageService.upload');
         // Get store
-        let store = this.getObjectStore('readwrite');
+		let store = this.getObjectStore('readwrite');
 		// Add item
-        let req = store.add(subject);
+		let req = store.add(subject);
 		// Return promise
-        return this.$q<void>((resolve, reject) => {
-            req.onerror = reject;
-            req.onsuccess = resolve;     
-        });
+		return this.$q<void>((resolve, reject) => {
+			req.onerror = reject;
+			req.onsuccess = resolve;
+		});
 	}
 
 	getAll() {
 		console.log('StorageService.getAll');
 		let results: IChuckJoke[] = [];
 		// Get store
-        let store = this.getObjectStore('readwrite');
+		let store = this.getObjectStore('readwrite');
 		// Get cursor
-        let req = store.openCursor();
+		let req = store.openCursor();
 		// Return promise
-        return this.$q<IChuckJoke[]>((resolve, reject) => {
-            req.onsuccess = (event: any) => {
-                let cursor: IDBCursorWithValue = event.target.result;
-                if (cursor) {
-                    results.push(cursor.value);
-                    cursor.continue();
-                } 
-                else {
-                    resolve(results);
-                }           
-            }
-            req.onerror = reject;
-        });
+		return this.$q<IChuckJoke[]>((resolve, reject) => {
+			req.onsuccess = (event: any) => {
+				let cursor: IDBCursorWithValue = event.target.result;
+				if (cursor) {
+					results.push(cursor.value);
+					cursor.continue();
+				}
+				else {
+					resolve(results);
+				}
+			};
+			req.onerror = reject;
+		});
 	}
 
 	getAllNerdy() {

@@ -4,7 +4,7 @@ let appModule = angular.module('app', ['ngComponentRouter'])
 // Registering services
 appModule
 .service('downloadService', DownloadService)
-.service('storageService', StorageService)
+.service('storageService', StorageService);
 
 // Registering components
 appModule
