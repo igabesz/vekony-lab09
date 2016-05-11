@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var watch = require('gulp-watch');
 var ts = require('gulp-typescript');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
@@ -13,8 +12,6 @@ var outDir = 'build';
 
 var tsConfig = {
 	target: 'es5',
-	sourceMap: true,
-	sortOutput: true,
 };
 
 gulp.task('build', () => {
